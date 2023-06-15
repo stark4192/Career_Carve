@@ -10,12 +10,12 @@ const PORT= process.env.PORT;
 
 connectDB();
 
-// const admin = require('firebase-admin');
-// const credentials = require("./serviceAccountKey.json");
+const admin = require('firebase-admin');
+const credentials = require("./serviceAccountKey.json");
 
-// admin.initializeApp({
-//     credential: admin.credential.cert(credentials)
-// });
+admin.initializeApp({
+    credential: admin.credential.cert(credentials)
+});
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
