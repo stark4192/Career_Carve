@@ -63,7 +63,6 @@ exports.signup = async (req, res) => {
     const salt = await bcrypt.genSalt(saltRounds);
     const hashedPassword = await bcrypt.hash(user.password, salt);
 
-
     createUserWithEmailAndPassword(auth, user.email, user.password)
       .then(async (userCredential) => {
         // Signed in
@@ -110,7 +109,7 @@ exports.signin = (req, res) => {
   const { email, password } = req.body;
 
   try{
-    signInWithEmailAndPassword(auth,email, password,)
+    signInWithEmailAndPassword(auth,email, password)
     .then(async(userCredential) => {
       // User signed in successfully
       const user = userCredential.user;
@@ -128,11 +127,6 @@ exports.signin = (req, res) => {
   }
 }
 
-
-
-
-
-
 exports.updatePhoneNumber = (req, res) => {
   console.log(req.body);
 
@@ -148,7 +142,7 @@ exports.updatePhoneNumber = (req, res) => {
   // const [username ,password] = credentials.split(':');
 
 
-  const phoneNumber = req.body.phone_number;
+  const phoneNumber = req.body.phoneNumber;
 
   const token = req.headers.authorization;
   let tk = token.split(' ')[1]
@@ -168,7 +162,7 @@ exports.updatePhoneNumber = (req, res) => {
       // Update the phone number in the database
       User.findOneAndUpdate(
         {email: auth.currentUser.email}, 
-        {phone_number:phoneNumber},
+        {phoneNumber:phoneNumber},
         {new: true}
       )
         .then((updatedUser) => {

@@ -14,7 +14,7 @@ var schema = new mongoose.Schema({
       type:String,
       required:true,
     },
-    phone_number:{
+    phoneNumber:{
       type:String,
       required:false,
     },
