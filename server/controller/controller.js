@@ -6,6 +6,7 @@ const Test = require('../model/Test');
 //const Question = require('../model/Question');
 //const Answer = require('../model/Answer');
 const UserResponse = require('../model/UserResponse');
+const axios = require('axios');
 
 const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, getIdToken ,verifyIdToken} = require('firebase/auth');
 
@@ -27,15 +28,15 @@ exports.api = async (req, res) => {
   const url = "https://api.catboys.com/catboy";
 
   try {
-    const response = await fetch(url);
-    const jsonData = await response.json();
+    const response = await axios.get(url);
+    const jsonData = response.data;
     console.log(jsonData);
     res.status(200).send(jsonData);
   } catch (error) {
     console.error(error);
     res.status(500).send({ error: 'An error occurred' });
   }
-}
+};
 
 exports.welcome = async (req, res) => {
   res.status(200).send({success: true,
